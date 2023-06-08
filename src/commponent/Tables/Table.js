@@ -5,17 +5,11 @@ import SelectType from "./TableTypeEnum";
 function Table() {
     const [col, setCol] = useState(["", "할일", "진행 여부"]); //열 (가로)
     const [rowSize, setRowSize] = useState(0); //행 (세로)
-    const [tableBox, setTableBox] = useState([]);
 
     const handleSetCol = (value) => {
         let copy = [...col]
         copy[col.length] = value;
         setCol(copy);
-        
-        let copyTableBox = [...tableBox]
-        copyTableBox.forEach(box => {
-            box.push(createTableBox());
-        });
     }
 
     const handleDeleteCol = () => {
@@ -23,17 +17,15 @@ function Table() {
         copy.length = copy.length-1;
         setCol(copy)
 
-        let copyTableBox = [...tableBox]
-        copyTableBox.forEach(box => {
-            box.length = box.length-1;
-        });
+        // let copyTableBox = [...tableBox]
+        // copyTableBox.forEach(box => {
+        //     box.length = box.length-1;
+        // });
     }
 
     const handleSetRowSize = (size) => {
-        setRowSize(rowSize + size);
-        tableBox.push(initTableBox(col.length));
-        setTableBox(tableBox);
-        console.log(tableBox);
+        let copy = rowSize;
+        setRowSize(copy + size);        
     }
 
     return (
@@ -52,11 +44,11 @@ function Table() {
                     <button value="colDelete" onClick={() => handleDeleteCol()}> - </button>
                 </div>
             </thead>
-            <tbody className="tBody">              
-                {tableBox.map((obj) => {
+            <tbody className="tBody">      
+                {gredTableBox(col, rowSize).map((item) => {
                     return (
                         <tr>
-                            {obj}
+                            {item}
                         </tr>
                     )
                 })}
@@ -69,23 +61,24 @@ function Table() {
     )
 }
 
-//하나의 열 생성
-function initTableBox(colSize) {
-    let box = [];
+function gredTableBox(col, rowSize) {
+    let boxs = [];
 
-    for (let i = 0; i < colSize-1; i++) {
-        if(i === 0) {
-            box.push(<td><input type = "checkbox"></input> </td>);
+    for (let r = 0; r < rowSize; r++) {
+        let itemTag = [];
+
+        for (let c = 0; c < col.length; c++) {
+            if(col[c] === "") {
+                console.log("진입?")
+                itemTag[c] = SelectType("CHACK_BOX");
+                continue;
+            }
+            itemTag[c] = SelectType("TEXT");       
         }
-        box.push(<td><input type = "text"></input></td>);
-        
+        boxs[r] = itemTag;
     }
-    return box;
-}
 
-//단일 칸 생성
-function createTableBox() {
-    return <td><input type = "text"></input></td>;
+    return boxs;
 }
 
 export default Table;

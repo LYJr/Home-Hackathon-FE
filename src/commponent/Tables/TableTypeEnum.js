@@ -7,7 +7,7 @@ Object.freeze(type);
 
 function SelectType (tableType) {
     let value = type.TEXT; 
-    if(tableType === type.CHACK_BOX.key) {
+    if(tableType === "CHACK_BOX") {
         value = type.CHACK_BOX;
     }
     return value;
