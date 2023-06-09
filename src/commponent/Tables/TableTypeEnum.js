@@ -1,12 +1,13 @@
 function CreateTableBody(row, setRow, col, index) {
 
+    
 }
 
 function CreateTableHeader(name, col, setCol, index) {
     const copy = [...col];
 
     if(index === 0) {
-        return <td>{col[0]}</td>
+        return <td></td>
     }
 
     return (

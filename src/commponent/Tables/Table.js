@@ -8,8 +8,15 @@ function Table() {
 
     const handleSetCol = (value) => {
         let copy = [...col]
+        let copyRow = [...row]
         copy[col.length] = value;
         setCol(copy);
+
+        copyRow.forEach(row => {
+            row.push("")
+        });
+
+        setRow(copyRow);
     }
 
     const handleDeleteCol = () => {
@@ -25,25 +32,18 @@ function Table() {
         setCol(copy)
     }
 
-
     const handleSetRow = () => {
         let copy = [...row];
         let createRow = new Array(col.length);
         copy.push(createRow)
-
-        copy.forEach(row => {
-            if(row.length !== col.length) {
-                for (let i = 0; i < col.length-row.length; i++) {
-                    row.push("")
-                }
-            }
-        });
 
         setRow(copy);
     }
 
     const handleDeleteRow = () => {
         let copy = [...row];
+        copy.pop();
+        setRow(copy);
     }
 
 
@@ -66,15 +66,19 @@ function Table() {
                 </div>
             </thead>
             <tbody className="tBody">  
-                {/* {GredTableBody(row, setRow, col).map((item) => {
+                {GredTableBody(row, setRow, col).map((item) => {
                     return (
-                        <th>{item}</th>
+                        <tr>
+                            {item}
+                        </tr>
                     )
-                })} */}
+                })}
 
             </tbody>
                 <div>
                     <button value="createRow" onClick={() => handleSetRow()}> + </button>
+                </div>
+                <div>
                     <button value="deleteRow" onClick={() => handleDeleteRow()}> - </button>
                 </div>
             </table>
@@ -96,14 +100,19 @@ function GreadTableHeader(col, setCol) {
 
 function GredTableBody(row, setRow, col) {
     let body = [];
+
     for (let r = 0; r < row.length; r++) {
         let item = [];
 
         for (let c = 0; c < col.length; c++) {
-            item.push(CreateTableBody(row, setRow, c));
+            if(c === 0) {
+                item[c] = <td><input type = "checkbox"></input></td>;
+            } else {
+                item[c] = <td><input type = "text"></input></td>
+            }
         }
     
-        body.push(row);
+        body.push(item);
     }
         
     return body;
