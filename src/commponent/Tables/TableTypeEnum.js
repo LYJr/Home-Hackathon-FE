@@ -1,16 +1,25 @@
-const type = {
-    TEXT : <td><input type = "text"></input></td>,
-    CHACK_BOX : <td><input type = "checkbox"></input></td>
-} 
+function CreateTableBody(row, setRow, col, index) {
 
-Object.freeze(type);
-
-function SelectType (tableType) {
-    let value = type.TEXT; 
-    if(tableType === "CHACK_BOX") {
-        value = type.CHACK_BOX;
-    }
-    return value;
 }
 
-export default SelectType;
+function CreateTableHeader(name, col, setCol, index) {
+    const copy = [...col];
+
+    if(index === 0) {
+        return <td>{col[0]}</td>
+    }
+
+    return (
+        <td>
+            <input type = "text" value={copy[index]} name= {name} 
+                onChange={(e) => {
+                    copy[index] = e.target.value;
+                    setCol(copy);
+                }}>
+            </input> 
+        </td>
+    );
+}
+
+
+export {CreateTableBody, CreateTableHeader};
