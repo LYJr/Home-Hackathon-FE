@@ -1,8 +1,12 @@
-Table {
+table {
     margin-left: auto;
     margin-right: auto;
 }
 
-th, td {
+td, tr, th {
     border: 1px solid black;
 }
+
+input {
+    border: none;
+} 

@@ -1,9 +1,9 @@
 import "./Table.css"
 import { useState } from "react";
-import {CreateTableBody, CreateTableHeader} from "./TableTypeEnum";
+import {CreateTableBodyRow, CreateTableHeaderRow} from "./TableControllro";
 
 function Table() {
-    const [col, setCol] = useState(["", "할일", "진행 여부"]); //열 (가로)
+    const [col, setCol] = useState([null, "할일", "진행 여부"]); //열 (가로)
     const [row, setRow] = useState([]); //행 (세로)
 
     const handleSetCol = (value) => {
@@ -59,7 +59,6 @@ function Table() {
                         </th>
                     )
                 })}
-
                 <div>
                     <button value="createCol" onClick={() => handleSetCol()}> + </button>
                     <button value="deleteCol" onClick={() => handleDeleteCol()}> - </button>
@@ -73,12 +72,9 @@ function Table() {
                         </tr>
                     )
                 })}
-
             </tbody>
                 <div>
                     <button value="createRow" onClick={() => handleSetRow()}> + </button>
-                </div>
-                <div>
                     <button value="deleteRow" onClick={() => handleDeleteRow()}> - </button>
                 </div>
             </table>
@@ -91,7 +87,7 @@ function GreadTableHeader(col, setCol) {
     let header = []
 
     for (let i = 0; i < col.length; i++) {
-        header[i] =  CreateTableHeader("thead"+i, col, setCol, i);        
+        header[i] =  CreateTableHeaderRow("thead"+i, col, setCol, i);        
     }
 
     return header;
@@ -102,19 +98,8 @@ function GredTableBody(row, setRow, col) {
     let body = [];
 
     for (let r = 0; r < row.length; r++) {
-        let item = [];
-
-        for (let c = 0; c < col.length; c++) {
-            if(c === 0) {
-                item[c] = <td><input type = "checkbox"></input></td>;
-            } else {
-                item[c] = <td><input type = "text"></input></td>
-            }
-        }
-    
-        body.push(item);
+        body.push(CreateTableBodyRow(row, setRow, col, r));
     }
-        
     return body;
 }
 
