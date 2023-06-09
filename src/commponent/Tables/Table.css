@@ -3,8 +3,19 @@ table {
     margin-right: auto;
 }
 
-td, tr, th {
-    border: outset;
+th {
+    border: solid 1px;
+    background-color:rgb(182, 205, 248, 0.7)    
+}
+
+th > input {
+    background-color:rgb(182, 205, 248, 0.0);
+    text-align: center;
+    font-weight: 400;
+}
+
+tr, td {
+    border: solid 1px;
 }
 
 input {

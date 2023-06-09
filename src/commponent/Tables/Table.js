@@ -10,8 +10,9 @@ function Table() {
         let copy = [...col]
         let copyRow = [...row]
         copy[col.length] = value;
-        setCol(copy);
 
+        setCol(copy);
+        //각 행 배열마다 값 추가
         copyRow.forEach(row => {
             row.push("")
         });
@@ -22,11 +23,11 @@ function Table() {
     const handleDeleteCol = () => {
         let copy = [...col]
         let copyRow = [...row]
-        copy.length = copy.length-1;
+        copy.pop();
 
         copyRow.forEach(item => {
             if(item.length === col.length ) {
-                item.length = item.length-1;
+                item.pop()
             }
         });
         setCol(copy)
@@ -45,7 +46,6 @@ function Table() {
         copy.pop();
         setRow(copy);
     }
-
 
     return (
         <>
@@ -81,7 +81,6 @@ function Table() {
         </>
     )
 }
-
 
 function GreadTableHeader(col, setCol) {
     let header = []
