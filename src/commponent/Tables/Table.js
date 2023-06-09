@@ -87,7 +87,7 @@ function GreadTableHeader(col, setCol) {
     let header = []
 
     for (let i = 0; i < col.length; i++) {
-        header[i] =  CreateTableHeaderRow("thead"+i, col, setCol, i);        
+        header[i] =  CreateTableHeaderRow(col, setCol, i);        
     }
 
     return header;

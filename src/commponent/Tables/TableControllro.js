@@ -3,18 +3,17 @@ function CreateTableBodyRow(row, setRow, col, rowIndex) {
     let copyRow = [...row];
 
     let rows= [];
-
     for (let i = 0; i < copyCol.length; i++) {
         if(i === 0) {
-            rows[i] = <td><input type ="checkbox" ></input></td>;
+            rows[i] = <td><input type ="checkbox" /> </td>;
             continue;
         }
-        rows[i] = <td><input type = "text"></input></td>;
+        rows[i] = <td><input type = "text" value={copyRow[rowIndex][i]} name={"tbody"+(rowIndex+1)+i}></input></td>;
     }
     return rows
 }
 
-function CreateTableHeaderRow(name, col, setCol, index) {
+function CreateTableHeaderRow(col, setCol, index) {
     let copyCol = [...col];
 
     if(index === 0) {
@@ -22,7 +21,7 @@ function CreateTableHeaderRow(name, col, setCol, index) {
     }
 
     return (
-            <input type = "text" value={copyCol[index]}
+            <input type = "text" value={copyCol[index]} name = {"thead"+0+index}
                 onChange={(e) => {
                     copyCol[index] = e.target.value;
                     setCol(copyCol);
@@ -30,6 +29,5 @@ function CreateTableHeaderRow(name, col, setCol, index) {
             </input> 
     );
 }
-
 
 export {CreateTableBodyRow, CreateTableHeaderRow};
