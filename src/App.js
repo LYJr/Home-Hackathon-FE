@@ -1,5 +1,5 @@
 import './App.css';
-import Header from './commponent/Herder';
+import Header from './commponent/Header';
 import Body from './commponent/Body';
 import Footer from './commponent/Footer';
 

@@ -1,6 +1,6 @@
 import "./Table.css"
 import { useState } from "react";
-import {CreateTableBodyRow, CreateTableHeaderRow} from "./TableControllro";
+import {CreateTableBodyRow, CreateTableHeaderRow} from "./TableCntroller";
 
 function Table() {
     const [col, setCol] = useState([null, "할일", "진행 여부"]); //열 (가로)
@@ -36,6 +36,7 @@ function Table() {
     const handleSetRow = () => {
         let copy = [...row];
         let createRow = new Array(col.length);
+        createRow[0] = false;
         copy.push(createRow)
 
         setRow(copy);
@@ -91,7 +92,6 @@ function GreadTableHeader(col, setCol) {
 
     return header;
 }
-
 
 function GredTableBody(row, setRow, col) {
     let body = [];

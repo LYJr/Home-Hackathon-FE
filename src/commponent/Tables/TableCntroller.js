@@ -26,7 +26,12 @@ function CreateTableBodyRow(row, setRow, col, rowIndex) {
             rows[i] = 
                 <td>
                     <input type ="checkbox"  
-                        name={"checkbox"+rowIndex}
+                        name={"checkbox"+rowIndex} 
+                        value={copyRow[rowIndex][0]}
+                        onChange={() => {
+                            copyRow[rowIndex][0] === false ? copyRow[rowIndex][0] = true : copyRow[rowIndex][0] = false
+                            setRow(copyRow);
+                        }}  
                         >
                     </input> 
                 </td>;
